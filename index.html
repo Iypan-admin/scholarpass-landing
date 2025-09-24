@@ -3,244 +3,325 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ISML — ScholarPass & InfinityPass</title>
-  <meta name="description" content="Claim ISML ScholarPass (FREE) or buy InfinityPass — learn French/German/Japanese, internships, discounts & study-abroad guidance."/>
-  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <title>ISML — Elite InfinityPass</title>
+  <meta name="description" content="ISML Elite InfinityPass — 3 years access to language courses, placement guidance & discounts. Buy InfinityPass." />
+  <meta name="theme-color" content="#0b1220" />
+  <!-- ======== CONFIG (replace these values) ======== -->
+  <script>
+    // Replace these with your real assets / links
+    const CONFIG = {
+      PIXEL_ID: 'YOUR_PIXEL_ID', // <-- replace with Meta Pixel ID
+      RAZORPAY_LINK: 'https://pages.razorpay.com/infinitypass', // <-- replace if different
+      LOGO_URL: 'https://via.placeholder.com/150x150.png?text=ISML+Logo', // <-- your logo hosted URL
+      PASS_IMG_URL: 'https://via.placeholder.com/560x360.png?text=InfinityPass+Design', // <-- your pass front image URL
+      SUPPORT_EMAIL: 'elitemembership.isml@gmail.com',
+      SUPPORT_WHATSAPP: '919385457322' // international format without +
+    };
+  </script>
+
+  <!-- ======== STYLES ======== -->
   <style>
     :root{
-      --bg:#f5f9ff; --accent:#0b67ff; --accent-dark:#0a52d6; --cta:#ffcc00;
-      --muted:#666; --card:#fff; --radius:12px; --max:1100px;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      --accent:#ff6a00;
+      --accent-2:#ff8a33;
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --max:980px;
+      --shadow: 0 10px 30px rgba(11,17,30,0.06);
     }
     *{box-sizing:border-box}
-    body{margin:0;background:linear-gradient(180deg,#f6fbff 0,#eef6ff 100%);color:#102a43;line-height:1.4}
-    .wrap{max-width:var(--max);margin:28px auto;padding:18px}
-    header{display:flex;gap:12px;align-items:center;justify-content:space-between}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#07b39b,#0b67ff);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
-    h1{font-size:20px;margin:0}
-    p.lead{margin:8px 0 0;color:var(--muted)}
-    .hero{margin-top:18px;background:linear-gradient(180deg,#fff 0,#f7fbff 100%);padding:18px;border-radius:14px;display:grid;grid-template-columns:1fr;gap:14px;align-items:center}
-    .hero-grid{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
-    .hero-left{flex:1}
-    .hero-right{min-width:240px}
-    .big{font-size:20px;font-weight:700;color:var(--accent-dark);margin:0}
-    .sub{color:var(--muted);margin:6px 0}
-    .cta-row{display:flex;gap:10px;flex-wrap:wrap}
-    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:600}
-    .btn.secondary{background:#fff;color:var(--accent);border:1px solid #dbe9ff}
-    .btn.ghost{background:transparent;border:1px dashed #cbdff8;color:var(--accent-dark)}
-    .price-pill{background:var(--cta);padding:8px 12px;border-radius:10px;font-weight:700}
-    /* product cards */
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:16px}
-    .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(11,103,255,0.06);min-height:220px;display:flex;flex-direction:column;justify-content:space-between}
-    .card h3{margin:0 0 6px}
-    .tag{display:inline-block;background:#e7f0ff;color:var(--accent-dark);padding:6px 8px;border-radius:8px;font-weight:700}
-    ul.benefits{padding-left:18px;margin:8px 0;color:var(--muted)}
-    .price{font-size:22px;font-weight:800;color:#111;margin-top:8px}
-    .muted{color:var(--muted);font-size:13px}
-    .footnote{font-size:13px;color:var(--muted)}
-    /* features */
-    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px}
-    .feature{background:#fff;padding:14px;border-radius:10px;box-shadow:0 6px 14px rgba(16,42,67,0.04)}
-    .faq{margin-top:18px}
-    .faq button{width:100%;text-align:left;padding:12px;border-radius:10px;border:1px solid #eef5ff;background:#fff;cursor:pointer;margin-bottom:8px}
-    footer{margin-top:26px;padding:18px;text-align:center;color:var(--muted);font-size:14px}
-    /* responsive */
-    @media(min-width:880px){
-      .hero{grid-template-columns:1fr 360px}
+    html,body{height:100%}
+    body{
+      margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,#f8fafc,#eef2f7);
+      color:#0b1220;-webkit-font-smoothing:antialiased;
     }
-    /* small helpers */
-    .pill{display:inline-block;padding:6px 10px;background:#f0f6ff;border-radius:999px;color:var(--accent-dark);font-weight:700}
-    .center{display:flex;align-items:center;gap:10px}
-    .muted-small{color:#7f8fa3;font-size:13px}
+    .wrap{max-width:var(--max);margin:18px auto;padding:16px}
+    header.hero{background:var(--card);border-radius:14px;padding:18px;box-shadow:var(--shadow);display:flex;gap:12px;align-items:center}
+    .logo{width:72px;height:72px;border-radius:10px;object-fit:cover;border:1px solid #eee}
+    .hero-left{flex:1}
+    h1{margin:0;font-size:20px;line-height:1.04}
+    p.lead{margin:8px 0;color:var(--muted)}
+    .price-bubble{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:12px;font-weight:700;display:inline-block}
+    .cta-row{display:flex;gap:12px;align-items:center;margin-top:12px}
+    a.btn{background:var(--accent);color:#fff;padding:12px 16px;border-radius:12px;text-decoration:none;font-weight:700;display:inline-block}
+    a.btn.ghost{background:transparent;border:2px solid var(--accent);color:var(--accent);padding:10px 14px}
+    .pass-image{width:240px;height:160px;border-radius:10px;object-fit:cover;box-shadow:0 10px 30px rgba(11,17,30,0.08)}
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+    .feature{background:var(--card);padding:12px;border-radius:10px;box-shadow:var(--shadow);display:flex;gap:10px;align-items:center}
+    .feature strong{display:block}
+    .bonuses{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .bonus{flex:1 1 200px;background:var(--card);padding:12px;border-radius:10px;box-shadow:var(--shadow)}
+    .faq{margin-top:18px;background:var(--card);padding:12px;border-radius:10px;box-shadow:var(--shadow)}
+    details summary{cursor:pointer;font-weight:700;padding:10px 0}
+    footer.sticky{position:fixed;left:0;right:0;bottom:0;background:#071026;color:#fff;padding:12px 16px;display:flex;gap:12px;align-items:center;justify-content:center;z-index:999;border-top:4px solid rgba(255,106,0,0.12)}
+    .floating-cta{position:fixed;right:16px;bottom:86px;z-index:999}
+    .countdown{background:linear-gradient(90deg,#111,#333);color:#fff;padding:8px 12px;border-radius:10px;font-weight:700;display:inline-block}
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:2000}
+    .modal{background:#fff;border-radius:12px;padding:18px;max-width:520px;width:94%;box-shadow:0 20px 60px rgba(0,0,0,0.25)}
+    .form-row{display:flex;gap:8px;flex-wrap:wrap}
+    label{font-size:13px;color:#0b1220}
+    input,select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef9;margin-top:6px}
+    @media (max-width:820px){
+      .hero{flex-direction:column;align-items:stretch}
+      .pass-image{width:100%;height:140px}
+      .features{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="logo">ISML</div>
-        <div>
-          <h1>Indian School for Modern Languages — Elite</h1>
-          <p class="lead">ScholarPass (FREE) • InfinityPass (Premium) • EduPass (Starter)</p>
+
+  <!-- ===== PAGE CONTENT ===== -->
+  <div class="wrap" role="main">
+
+    <header class="hero" aria-label="ISML InfinityPass hero">
+      <img id="logoImg" class="logo" src="" alt="ISML logo" />
+      <div class="hero-left">
+        <h1>ISML Elite — InfinityPass</h1>
+        <p class="lead">One pass. 3 years. Unlimited access to language courses (online & offline), placement guidance and exclusive discounts. Buy now — limited-time price.</p>
+
+        <div style="margin-top:6px">
+          <span class="price-bubble" id="priceBubble">Special: ₹499</span>
+          <span style="margin-left:10px;color:var(--muted);font-size:13px">Festive offer — price increases after the offer ends</span>
+        </div>
+
+        <div class="cta-row">
+          <a id="primaryBuy" class="btn" href="#" role="button">Buy InfinityPass — ₹499</a>
+          <a class="btn ghost" href="#faq">FAQ</a>
+
+          <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+            <div class="countdown" id="countdown" aria-live="polite">48:00:00</div>
+            <div style="font-size:13px;color:var(--muted)">Pass issued within 48 hours after purchase</div>
+          </div>
+        </div>
+
+        <div class="features" style="margin-top:14px">
+          <div class="feature">
+            <div>
+              <strong>Multi-language</strong>
+              <div style="color:var(--muted)">French • German • Japanese • future additions</div>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div>
+              <strong>Priority placement</strong>
+              <div style="color:var(--muted)">Career support & internship alerts</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bonuses">
+          <div class="bonus"><strong>Offline classes access</strong><div style="color:var(--muted)">Visit ISML centers with your pass</div></div>
+          <div class="bonus"><strong>Discount vouchers</strong><div style="color:var(--muted)">Up to 15% off future paid programs</div></div>
+          <div class="bonus"><strong>Study-abroad guidance</strong><div style="color:var(--muted)">Roadmap & sample checklists</div></div>
         </div>
       </div>
-      <div class="center">
-        <span class="muted-small">Need help?</span>
-        <a href="https://wa.me/91XXXXXXXXXX" aria-label="WhatsApp" class="btn ghost">WhatsApp Us</a>
+
+      <div>
+        <img id="passImg" class="pass-image" src="" alt="ISML InfinityPass card image" />
       </div>
     </header>
 
-    <!-- HERO -->
-    <section class="hero" role="region" aria-labelledby="hero-title">
-      <div class="hero-left">
-        <h2 id="hero-title" class="big">Students — Claim your <span class="pill">FREE ScholarPass</span> or get InfinityPass</h2>
-        <p class="sub">ScholarPass is issued to eligible students (age 7+) — get free resources, internships, discounts and study-abroad guidance.</p>
-
-        <div class="cta-row" style="margin-top:12px">
-          <button class="btn" onclick="openScholarForm()">Claim ScholarPass — FREE</button>
-          <a class="btn secondary" href="#pricing">View Passes</a>
+    <section style="margin-top:18px">
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <div style="flex:1;background:var(--card);padding:14px;border-radius:10px;box-shadow:var(--shadow)">
+          <h3 style="margin:0 0 8px 0">How it works</h3>
+          <ol style="margin:0;padding-left:18px;color:var(--muted)">
+            <li>Click Buy — we'll ask a quick two-question form.</li>
+            <li>Confirm & continue — you'll be redirected to secure Razorpay checkout.</li>
+            <li>Pass is issued digitally within 48 hours & physical card dispatched if applicable.</li>
+          </ol>
         </div>
-
-        <p class="muted-small" style="margin-top:10px">ScholarPass issued within 48 hours after form completion. Only to students (7+)</p>
-      </div>
-
-      <aside class="hero-right" aria-label="Promotional card">
-        <div style="background:linear-gradient(180deg,#0b67ff,#07b39b);color:#fff;padding:14px;border-radius:12px;">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <div style="font-size:13px;opacity:0.9">ISML Elite</div>
-              <div style="font-weight:800;font-size:22px;margin-top:6px">ScholarPass — ₹0 <span style="font-size:12px;font-weight:600;opacity:0.9">Giveaway</span></div>
-            </div>
-            <div class="price-pill">Worth ₹31,750+</div>
-          </div>
-          <div style="margin-top:10px;font-size:13px">Limited passes — students only. Fill the short form to claim.</div>
+        <div style="flex:1;background:var(--card);padding:14px;border-radius:10px;box-shadow:var(--shadow)">
+          <h3 style="margin:0 0 8px 0">Support</h3>
+          <p style="margin:0;color:var(--muted)">Need help? WhatsApp: <a id="waLink" href="#" target="_blank" rel="noopener">Chat</a><br>Email: <a id="emailLink" href="#">support</a></p>
         </div>
-      </aside>
-    </section>
-
-    <!-- PRICING CARDS -->
-    <section id="pricing" style="margin-top:20px">
-      <h3 style="margin:0 0 8px">Passes & Pricing</h3>
-      <div class="cards" role="list">
-
-        <!-- EduPass -->
-        <article class="card" role="listitem" aria-label="EduPass">
-          <div>
-            <div class="tag">EduPass</div>
-            <h3>ISML Elite EduPass</h3>
-            <p class="muted">1-year validity • Pick 1 language • Online</p>
-            <ul class="benefits">
-              <li>Benefits worth ₹1,250+</li>
-              <li>10% course discount</li>
-              <li>Online lessons</li>
-            </ul>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center;justify-content:space-between">
-            <div>
-              <div class="price">₹49 <span class="muted" style="font-weight:600"> (offer)</span></div>
-              <div class="muted-small">Then ₹199 (regular)</div>
-            </div>
-            <div>
-              <button class="btn" onclick="buy('edu')">Buy</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- ScholarPass -->
-        <article class="card" role="listitem" aria-label="ScholarPass">
-          <div>
-            <div class="tag">ScholarPass — Giveaway</div>
-            <h3>ISML Elite ScholarPass</h3>
-            <p class="muted">2-year validity • 3 languages • Online + Offline</p>
-            <ul class="benefits">
-              <li>Benefits worth ₹31,740+</li>
-              <li>Up to 12% course discount</li>
-              <li>Study-abroad guidance</li>
-            </ul>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center;justify-content:space-between">
-            <div>
-              <div class="price">FREE</div>
-              <div class="muted-small">Only students (7+). Complete claim form.</div>
-            </div>
-            <div>
-              <button class="btn" onclick="openScholarForm()">Claim</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- InfinityPass -->
-        <article class="card" role="listitem" aria-label="InfinityPass">
-          <div>
-            <div class="tag" style="background:#fff;color:var(--accent-dark);border:1px solid #e3eeff">InfinityPass</div>
-            <h3>ISML Elite InfinityPass</h3>
-            <p class="muted">3-year access • All languages • Online + Offline • Priority placement</p>
-            <ul class="benefits">
-              <li>Benefits worth ₹59,700+</li>
-              <li>Up to 15% discount • 3-month internship</li>
-              <li>Priority placement</li>
-            </ul>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center;justify-content:space-between">
-            <div>
-              <div class="price">Offer ₹499 → then ₹999</div>
-              <div class="muted-small">Festive offer (dates on site)</div>
-            </div>
-            <div>
-              <button class="btn" onclick="buy('infinity')">Buy InfinityPass</button>
-            </div>
-          </div>
-        </article>
-
       </div>
     </section>
 
-    <!-- Features -->
-    <section class="features" aria-label="What you get">
-      <div class="feature">
-        <strong>Learn 3 major languages</strong>
-        <div class="muted-small">French • German • Japanese — self-paced + live classes</div>
-      </div>
-      <div class="feature">
-        <strong>Internships & Placement</strong>
-        <div class="muted-small">Priority placement for InfinityPass holders</div>
-      </div>
-      <div class="feature">
-        <strong>Study abroad guidance</strong>
-        <div class="muted-small">University shortlisting, application tips & mock interviews</div>
-      </div>
-      <div class="feature">
-        <strong>Course discounts</strong>
-        <div class="muted-small">Up to 15% for InfinityPass, 12% for ScholarPass</div>
-      </div>
+    <section id="faq" class="faq" style="margin-top:18px">
+      <h3 style="margin-top:0">Frequently asked questions</h3>
+      <details style="margin-bottom:8px"><summary>Who can buy the pass?</summary><div style="color:var(--muted);margin-top:8px">Open to everyone. For ScholarPass giveaways (if announced), eligibility rules apply.</div></details>
+      <details style="margin-bottom:8px"><summary>How long until I receive my pass?</summary><div style="color:var(--muted);margin-top:8px">Digital activation within 48 hours. Physical card dispatched separately where applicable.</div></details>
+      <details style="margin-bottom:8px"><summary>Refund policy</summary><div style="color:var(--muted);margin-top:8px">Contact <span id="supportEmailText"></span> — refunds handled as per policy.</div></details>
     </section>
 
-    <!-- FAQ -->
-    <section class="faq" aria-label="FAQ">
-      <h3>FAQ</h3>
-      <button onclick="toggleFaq(this)">Who can claim ScholarPass?</button>
-      <div class="muted-small" style="display:none;padding:10px 12px;border-radius:8px">Students aged 7 and above. After you submit the claim form, pass will be issued within 48 hours.</div>
-
-      <button onclick="toggleFaq(this)">How do I receive the pass?</button>
-      <div class="muted-small" style="display:none;padding:10px 12px;border-radius:8px">You’ll get ScholarPass via WhatsApp or email after verification.</div>
-
-      <button onclick="toggleFaq(this)">Where do I buy InfinityPass?</button>
-      <div class="muted-small" style="display:none;padding:10px 12px;border-radius:8px">Click Buy — will take you to secure payment (Razorpay). You can also find InfinityPass on Amazon (after launch dates).</div>
-    </section>
-
-    <footer>
-      <div class="muted-small">ISML — Indian School for Modern Languages • <a href="https://www.indianschoolformodernlanguages.com" target="_blank" rel="noopener">indianschoolformodernlanguages.com</a></div>
-      <div style="margin-top:8px" class="muted-small">© <span id="yr"></span> ISML. All rights reserved.</div>
-    </footer>
+    <div style="height:120px"></div>
   </div>
 
+  <!-- ===== Sticky + Floating CTAs ===== -->
+  <div class="floating-cta" aria-hidden="false">
+    <a id="floatingBuy" class="btn" href="#" target="_blank" rel="noopener">Buy InfinityPass ₹499</a>
+  </div>
+
+  <footer class="sticky" role="contentinfo">
+    <div style="flex:1;max-width:980px;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap">
+      <div style="text-align:left">
+        <div style="font-weight:800">ISML Elite — InfinityPass</div>
+        <div style="font-size:13px;color:#bcc6d6">3 years access · placement guidance · student discounts</div>
+      </div>
+      <div class="cta">
+        <a id="stickyBuy" class="btn" href="#" target="_blank" rel="noopener">Buy Now — ₹499</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== Modal: short form (2 questions + contact) ===== -->
+  <div id="modalBackdrop" class="modal-backdrop" style="display:none">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h2 id="modalTitle">Quick details before checkout</h2>
+      <p style="margin-top:6px;color:var(--muted)">This helps us assign the right course & mode after purchase.</p>
+
+      <div style="margin-top:12px">
+        <label for="buyerName">Full name</label>
+        <input id="buyerName" type="text" placeholder="Your name" required />
+
+        <label for="buyerEmail" style="margin-top:8px">Email</label>
+        <input id="buyerEmail" type="email" placeholder="you@example.com" required />
+
+        <label for="language" style="margin-top:8px">Which language will you start with?</label>
+        <select id="language">
+          <option value="French">French</option>
+          <option value="German">German</option>
+          <option value="Japanese">Japanese</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="mode" style="margin-top:8px">Preferred mode</label>
+        <select id="mode">
+          <option value="Online">Online</option>
+          <option value="Offline">Offline</option>
+          <option value="Hybrid">Hybrid</option>
+        </select>
+
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <button id="modalCancel" class="btn ghost" type="button">Cancel</button>
+          <button id="modalConfirm" class="btn" type="button">Proceed to Checkout</button>
+        </div>
+      </div>
+
+      <p style="margin-top:10px;font-size:13px;color:var(--muted)">We will prefill this info with your order so our team can process your benefits faster.</p>
+    </div>
+  </div>
+
+  <!-- ===== Meta Pixel (replace PIXEL_ID) ===== -->
   <script>
-    document.getElementById('yr').innerText = new Date().getFullYear();
-
-    function openScholarForm(){
-      // scholar pass google form link (replace if needed)
-      window.open('https://forms.gle/Rx73UydyfaRKB3U9A','_blank');
-    }
-
-    function buy(which){
-      if(which === 'infinity'){
-        // Razorpay landing for InfinityPass - replace with your real Razorpay page link
-        window.open('https://pages.razorpay.com/infinitypass','_blank');
-      } else if(which === 'edu'){
-        // small checkout or contact
-        window.open('https://pages.razorpay.com/edupass','_blank');
-      } else {
-        alert('Buy: ' + which);
+    (function() {
+      if(!CONFIG.PIXEL_ID || CONFIG.PIXEL_ID === 'YOUR_PIXEL_ID'){
+        console.warn('Meta Pixel: replace CONFIG.PIXEL_ID with your actual Pixel ID');
+        return;
       }
-    }
-
-    function toggleFaq(btn){
-      const next = btn.nextElementSibling;
-      if(!next) return;
-      next.style.display = next.style.display === 'block' ? 'none' : 'block';
-    }
+      // Standard Meta Pixel
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+       if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+       t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script',
+       'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', CONFIG.PIXEL_ID);
+      fbq('track', 'PageView');
+      fbq('track', 'ViewContent', {content_name: 'InfinityPass Landing', content_category: 'Membership'});
+      // make fbq available to other code
+      window.fbq = window.fbq || function(){ (window.fbq.q = window.fbq.q || []).push(arguments); };
+    })();
   </script>
+
+  <!-- ===== Main JS: populate images, CTA wiring, modal, countdown, pixel event on InitiateCheckout ===== -->
+  <script>
+    (function(){
+      // populate images & support links
+      document.getElementById('logoImg').src = CONFIG.LOGO_URL;
+      document.getElementById('passImg').src = CONFIG.PASS_IMG_URL;
+      document.getElementById('waLink').href = 'https://wa.me/' + CONFIG.SUPPORT_WHATSAPP;
+      document.getElementById('emailLink').href = 'mailto:' + CONFIG.SUPPORT_EMAIL;
+      document.getElementById('supportEmailText').innerText = CONFIG.SUPPORT_EMAIL;
+
+      // connect Buy CTAs to open modal instead of direct redirect
+      const buyButtons = [document.getElementById('primaryBuy'), document.getElementById('floatingBuy'), document.getElementById('stickyBuy')];
+      buyButtons.forEach(b=>{
+        b.addEventListener('click', function(evt){
+          evt.preventDefault();
+          openModal();
+        });
+      });
+
+      // modal controls
+      const modal = document.getElementById('modalBackdrop');
+      const cancel = document.getElementById('modalCancel');
+      const confirm = document.getElementById('modalConfirm');
+
+      function openModal(){ modal.style.display = 'flex'; document.getElementById('buyerName').focus(); }
+      function closeModal(){ modal.style.display = 'none'; }
+
+      cancel.addEventListener('click', closeModal);
+
+      confirm.addEventListener('click', function(){
+        // read values
+        const name = document.getElementById('buyerName').value.trim();
+        const email = document.getElementById('buyerEmail').value.trim();
+        const language = document.getElementById('language').value;
+        const mode = document.getElementById('mode').value;
+
+        if(!name || !email){ alert('Please enter name and email to continue.'); return; }
+
+        // store locally (optional)
+        const buyer = { name, email, language, mode, ts: new Date().toISOString() };
+        localStorage.setItem('isml_buyer', JSON.stringify(buyer));
+
+        // Fire Meta Pixel InitiateCheckout if configured
+        try{
+          if(window.fbq){
+            fbq('track', 'InitiateCheckout', {
+              content_name: 'InfinityPass',
+              content_category: 'Membership',
+              value: 499.00,
+              currency: 'INR'
+            });
+          }
+        }catch(e){ console.warn('fbq error', e); }
+
+        // build Razorpay URL with params so your order metadata has language/mode/name/email
+        const rp = new URL(CONFIG.RAZORPAY_LINK);
+        rp.searchParams.set('name', name);
+        rp.searchParams.set('email', email);
+        rp.searchParams.set('language', language);
+        rp.searchParams.set('mode', mode);
+        // redirect
+        window.open(rp.toString(), '_blank');
+        closeModal();
+      });
+
+      // Countdown (48h persisting)
+      (function(){
+        const key = 'isml_deadline';
+        let deadline = localStorage.getItem(key);
+        if(!deadline){ deadline = new Date(Date.now() + 48*3600*1000).toISOString(); localStorage.setItem(key, deadline); }
+        deadline = new Date(deadline);
+
+        const el = document.getElementById('countdown');
+        function tick(){
+          const diff = deadline - new Date();
+          if(diff <= 0){ el.textContent = 'Offer ended'; clearInterval(id); return; }
+          const h = Math.floor(diff/3600000);
+          const m = Math.floor((diff%3600000)/60000);
+          const s = Math.floor((diff%60000)/1000);
+          el.textContent = String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+        }
+        tick();
+        const id = setInterval(tick,1000);
+      })();
+
+      // accessibility: close modal with ESC
+      window.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ document.getElementById('modalBackdrop').style.display='none'; } });
+    })();
+  </script>
+
+  <!-- ===== Pixel fallback message for missing ID (helpful) ===== -->
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
+  /></noscript>
+
+  <!-- ===== End of file ===== -->
 </body>
 </html>
